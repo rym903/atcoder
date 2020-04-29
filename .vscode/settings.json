@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "functional": "cpp"
+        "functional": "cpp",
+        "stack": "cpp",
+        "algorithm": "cpp"
     }
 }
