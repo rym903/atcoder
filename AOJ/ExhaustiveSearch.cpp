@@ -34,7 +34,7 @@ int main()
             }
         }
     }
-
+    
     cin >> q;
     REP(i, q){
         cin >> t;
