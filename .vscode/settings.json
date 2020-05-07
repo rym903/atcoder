@@ -5,6 +5,10 @@
         "algorithm": "cpp",
         "vector": "cpp",
         "random": "cpp",
-        "ratio": "cpp"
+        "ratio": "cpp",
+        "set": "cpp",
+        "bitset": "cpp",
+        "iostream": "cpp",
+        "utility": "cpp"
     }
 }
