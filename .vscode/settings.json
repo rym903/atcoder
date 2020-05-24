@@ -9,6 +9,9 @@
         "set": "cpp",
         "bitset": "cpp",
         "iostream": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "deque": "cpp",
+        "ios": "cpp",
+        "queue": "cpp"
     }
 }

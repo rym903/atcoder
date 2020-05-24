@@ -1,131 +1,121 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define REP(i,n) for(int i=0; i<(n); i++)
+#define rep(i,n) for(int i=0; i<(n); i++)
 #define FOR(i,x,n) for(int i=x; i<(n); i++)
 #define ALL(n) begin(n),end(n)
 #define MOD 1000000007
+
+// #define DEBUG_F
  
 typedef long long ll;
 typedef unsigned int ui;
 typedef unsigned long long ull;
 template <class T>
 void print(T& x){printf("%d\n", x);}
+void printvec(vector<int> a){
+    rep(i, a.size()-1){
+        printf("%d ", a[i]);
+    }
+    printf("%d\n", a[a.size()-1]);
+}
 
 struct Node{
-    int num;
-    Node *next;
+    int x;
     Node *prev;
+    Node *next;
 };
- 
-Node *nodeloc(void){
-    Node *node;
-    node = (Node*)malloc(sizeof(Node));
 
-    if(node == NULL){
-        printf("allocate error\n");
-        exit(0);
-    }
+Node ed;
+Node *cur, *head;
 
-    return node;
+Node *newNode(){
+    Node *p = (Node*)malloc(sizeof(Node));
+    return p;
 }
 
-Node *sethead(Node *head, int x){
-    Node *p = nodeloc();
-    p->num = x;
+void insert(int x){
+#ifdef DEBUG_F
+    printf("insert(%d)\n", x);
+#endif
 
-    p->next=NULL; p->prev=NULL;
-    head = p;
-
-    return head;
-}
-
-Node *insert(Node *head, Node *cursor, int x){
-    Node *p = nodeloc();
-    p->num = x;
-    if(cursor==NULL){
-        p->next = NULL; p->prev=cursor->prev;
-        cursor = p;
+    Node *p;
+    p = newNode();
+    p->x = x;
+    p->next = cur;
+    p->prev = cur->prev;
+    if(cur->prev==NULL){
+        head = p;
     }else{
-        p->next = cursor; p->prev=cursor->prev;
-        if(cursor->prev != NULL){
-            cursor->prev->next = p;
-        }
-        cursor->prev = p;
-        cursor = p;
+        cur->prev->next = p;
     }
-    return cursor;
+    cur->prev = p;
+    cur = p;
 }
 
-Node *move(Node *head, Node *cursor, int x){
-    int d=abs(x);
-    if(x>0){
-        REP(i, d) cursor = cursor->next;
-    }else if(x<0){
-        REP(i, d) cursor = cursor->prev;
-    }
+void move_(int d){
+#ifdef DEBUG_F
+    printf("move(%d)\n", d);
+#endif
 
-    return cursor;
+    if(d>0){
+        rep(i, d) cur = cur->next;
+    }else if(d<0){
+        rep(i, -d) cur = cur->prev;
+    }
 }
 
-Node *erase(Node *head, Node *cursor){
-    // printf("%d %d\n", cursor->prev->next->num, cursor->next->num);
-    cursor->prev->next = cursor->next;
-    // printf("done\n");
-    if(cursor->next != NULL){
-        cursor->next->prev = cursor->prev;
+void erase(){
+#ifdef DEBUG_F
+    printf("erase()\n");
+#endif
+    if(cur->prev==NULL){ //先頭にいる
+        cur->next->prev = NULL;
+        cur = cur->next;
+        head = cur;
+    }else{
+        cur->prev->next = cur->next;
+        cur->next->prev = cur->prev;
+        cur = cur->next;
     }
-    // printf("done\n");
-    cursor = cursor->next;
-    // printf("done\n");
-    return cursor;
 }
-
-
+ 
 int main()
 {
+    ed.next = NULL;
+    ed.prev = NULL;
+    ed.x = INT32_MAX;
+    cur = &ed;
+    head = &ed;
+
     int q;
     cin >> q;
-    Node *head=NULL;
-    Node *cursor=NULL;
 
-    int s, t;
-    REP(i, q){
+    int com, d;
+    rep(i, q){
+        cin >> com;
+        if(com == 0){
+            cin >> d;
+            insert(d);
+        }else if(com==1){
+            cin >> d;
+            move_(d);
+        }else if(com==2){
+            erase();
+        }
+#ifdef DEBUG_F
         Node *tmp = head;
-        while(tmp!=NULL){
-            if(tmp==cursor) printf("o");
-            printf("%d ", tmp->num);
+        while(tmp->next != NULL){
+            if(tmp==cur) printf(">");
+            print(tmp->x);
             tmp = tmp->next;
         }
-        printf("\n");
-        scanf("%d", &s);
-        if(s==0){
-            scanf("%d", &t);
-            printf("%dを挿入\n", t);
-            if(head==NULL){
-                head = sethead(head, t);
-                cursor = head;
-            }else{
-                cursor = insert(head, cursor, t);
-                if(head==cursor->next){
-                    head = cursor;
-                }
-            }
-        }else if(s==1){
-            scanf("%d", &t);
-            printf("%d移動\n", t);
-            cursor = move(head, cursor, t);
-        }else if(s==2){
-            printf("削除\n");
-            cursor = erase(head, cursor);
-            
-            if(head->next == NULL){
-                head = NULL;
-            }
-        }
+#endif
     }
-
-    while(head!=NULL){
-        printf("%d ", head->num);
+#ifdef DEBUG_F
+    printf("\n");
+#endif
+    while(head->next != NULL){
+        print(head->x);
         head = head->next;
     }
     return 0;
