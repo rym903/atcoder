@@ -12,6 +12,9 @@
         "utility": "cpp",
         "deque": "cpp",
         "ios": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "string": "cpp",
+        "ostream": "cpp",
+        "iosfwd": "cpp"
     }
 }
