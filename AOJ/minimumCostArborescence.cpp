@@ -49,7 +49,7 @@ int main()
         rep(i, v){
             for(P ed: G[i]){
                 cost = ed.first; to = ed.second;
-                if(to == i) continue;
+                if(t[to].second==)
                 if(t[to].first > cost){
                     // dist[to] = dist[i] + cost;
                     t[to] = ed;
