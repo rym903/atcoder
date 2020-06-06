@@ -17,19 +17,16 @@ template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } retu
  
 int main()
 {
-    ll a; double b;
-    cin >> a >> b;
-    long double c = a*b;
-    string s = to_string(c);
+    ll a, r, n; cin >> a >> r >> n;
+    ll m = powl(10, 9);
 
     int i=0;
-    // cout << c << endl;
-    while(1){
-        if(s[i]=='.') break;
-        cout << s[i];
+    while(i < n && m > a) {
+        a += r;
         i++;
     }
-    cout << endl;
+
+    if(m>a) printf("large\n");
+    else printf("%lld\n", a);
     return 0;
-    
 }

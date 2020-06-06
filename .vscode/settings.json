@@ -16,5 +16,6 @@
         "string": "cpp",
         "ostream": "cpp",
         "iosfwd": "cpp"
-    }
+    },
+    "python.pythonPath": "/usr/bin/python3"
 }

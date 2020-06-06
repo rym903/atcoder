@@ -17,19 +17,25 @@ template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } retu
  
 int main()
 {
-    ll a; double b;
-    cin >> a >> b;
-    long double c = a*b;
-    string s = to_string(c);
+    int n, q, m; cin >> n >> m >> q;
+    vector<int> score(n, 0);
+    vector<vector<int>> prob(m); // 問題prob[n]を解いた人
+    vector<vector<int>> solve(n); // nが解いた問題
 
-    int i=0;
-    // cout << c << endl;
-    while(1){
-        if(s[i]=='.') break;
-        cout << s[i];
-        i++;
+    int a, b, c;
+    rep(i, q){
+        cin >> a >> b;
+        if(a==1){
+            int t = 0;
+            for(int j: solve[a-1]) t += n - prob[j].size();
+            printf("%d\n", t);
+        }else{
+            cin >> c;
+            prob[c-1].push_back(b-1);
+            solve[b-1].push_back(c-1);
+        }
     }
-    cout << endl;
+
+
     return 0;
-    
 }

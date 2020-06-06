@@ -17,19 +17,7 @@ template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } retu
  
 int main()
 {
-    ll a; double b;
-    cin >> a >> b;
-    long double c = a*b;
-    string s = to_string(c);
-
-    int i=0;
-    // cout << c << endl;
-    while(1){
-        if(s[i]=='.') break;
-        cout << s[i];
-        i++;
-    }
-    cout << endl;
+    int a,b; cin >> a>> b;
+    pr(a*b);
     return 0;
-    
 }
