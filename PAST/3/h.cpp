@@ -45,7 +45,6 @@ int main()
     }
 
     int m = dp[l];
-    if(dp[l] > dp[l-1]+t[0]) m = dp[l-1] + t[0];
     if(acs[l+1]==2 || acs[l+1]==3) chmin(m, dp[l+1] - act[1]/2);
     if(acs[l+2]==3) chmin(m, dp[l+2] - (t[1]*3 + t[0])/2);
     if(acs[l+3]==3) chmin(m, dp[l+3] - (t[1]*5 + t[0])/2);
